@@ -16,6 +16,16 @@
 		2903ABFC2A850A1F0064680D /* IOSDatabasesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903ABFB2A850A1F0064680D /* IOSDatabasesTests.swift */; };
 		2903AC062A850A1F0064680D /* IOSDatabasesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC052A850A1F0064680D /* IOSDatabasesUITests.swift */; };
 		2903AC082A850A1F0064680D /* IOSDatabasesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC072A850A1F0064680D /* IOSDatabasesUITestsLaunchTests.swift */; };
+		2903AC1D2A852A4F0064680D /* DuckDBLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC1C2A852A4F0064680D /* DuckDBLogic.swift */; };
+		2903AC1E2A852A4F0064680D /* DuckDBLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC1C2A852A4F0064680D /* DuckDBLogic.swift */; };
+		2903AC202A852A760064680D /* DataBaseBenchmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC1F2A852A760064680D /* DataBaseBenchmarkView.swift */; };
+		2903AC212A852A760064680D /* DataBaseBenchmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC1F2A852A760064680D /* DataBaseBenchmarkView.swift */; };
+		2903AC242A852AA60064680D /* DuckDB in Frameworks */ = {isa = PBXBuildFile; productRef = 2903AC232A852AA60064680D /* DuckDB */; };
+		2903AC272A852B260064680D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2903AC262A852B260064680D /* Realm */; };
+		2903AC292A852B260064680D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2903AC282A852B260064680D /* RealmSwift */; };
+		2903AC2C2A852BE50064680D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2903AC2B2A852BE50064680D /* SQLite */; };
+		2903AC2E2A852C7F0064680D /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC2D2A852C7F0064680D /* Database.swift */; };
+		2903AC2F2A852C7F0064680D /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2903AC2D2A852C7F0064680D /* Database.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +58,9 @@
 		2903AC012A850A1F0064680D /* IOSDatabasesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSDatabasesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2903AC052A850A1F0064680D /* IOSDatabasesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDatabasesUITests.swift; sourceTree = "<group>"; };
 		2903AC072A850A1F0064680D /* IOSDatabasesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDatabasesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2903AC1C2A852A4F0064680D /* DuckDBLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckDBLogic.swift; sourceTree = "<group>"; };
+		2903AC1F2A852A760064680D /* DataBaseBenchmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseBenchmarkView.swift; sourceTree = "<group>"; };
+		2903AC2D2A852C7F0064680D /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +68,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2903AC2C2A852BE50064680D /* SQLite in Frameworks */,
+				2903AC292A852B260064680D /* RealmSwift in Frameworks */,
+				2903AC272A852B260064680D /* Realm in Frameworks */,
+				2903AC242A852AA60064680D /* DuckDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,8 +115,11 @@
 		2903ABE42A850A1E0064680D /* IOSDatabases */ = {
 			isa = PBXGroup;
 			children = (
+				2903AC172A8529E90064680D /* DatabaseLogic */,
+				2903AC162A8529DE0064680D /* DatabaseViews */,
 				2903ABE52A850A1E0064680D /* IOSDatabasesApp.swift */,
 				2903ABE72A850A1E0064680D /* ContentView.swift */,
+				2903AC2D2A852C7F0064680D /* Database.swift */,
 				2903ABE92A850A1F0064680D /* Assets.xcassets */,
 				2903ABEE2A850A1F0064680D /* Persistence.swift */,
 				2903ABF02A850A1F0064680D /* IOSDatabases.xcdatamodeld */,
@@ -133,6 +153,22 @@
 			path = IOSDatabasesUITests;
 			sourceTree = "<group>";
 		};
+		2903AC162A8529DE0064680D /* DatabaseViews */ = {
+			isa = PBXGroup;
+			children = (
+				2903AC1F2A852A760064680D /* DataBaseBenchmarkView.swift */,
+			);
+			path = DatabaseViews;
+			sourceTree = "<group>";
+		};
+		2903AC172A8529E90064680D /* DatabaseLogic */ = {
+			isa = PBXGroup;
+			children = (
+				2903AC1C2A852A4F0064680D /* DuckDBLogic.swift */,
+			);
+			path = DatabaseLogic;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +185,12 @@
 			dependencies = (
 			);
 			name = IOSDatabases;
+			packageProductDependencies = (
+				2903AC232A852AA60064680D /* DuckDB */,
+				2903AC262A852B260064680D /* Realm */,
+				2903AC282A852B260064680D /* RealmSwift */,
+				2903AC2B2A852BE50064680D /* SQLite */,
+			);
 			productName = IOSDatabases;
 			productReference = 2903ABE22A850A1E0064680D /* IOSDatabases.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +263,11 @@
 				Base,
 			);
 			mainGroup = 2903ABD92A850A1E0064680D;
+			packageReferences = (
+				2903AC222A852AA60064680D /* XCRemoteSwiftPackageReference "duckdb-swift" */,
+				2903AC252A852B260064680D /* XCRemoteSwiftPackageReference "realm-swift" */,
+				2903AC2A2A852BE50064680D /* XCRemoteSwiftPackageReference "SQLite" */,
+			);
 			productRefGroup = 2903ABE32A850A1E0064680D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -263,9 +310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2903AC1D2A852A4F0064680D /* DuckDBLogic.swift in Sources */,
 				2903ABF22A850A1F0064680D /* IOSDatabases.xcdatamodeld in Sources */,
 				2903ABEF2A850A1F0064680D /* Persistence.swift in Sources */,
+				2903AC202A852A760064680D /* DataBaseBenchmarkView.swift in Sources */,
 				2903ABE82A850A1E0064680D /* ContentView.swift in Sources */,
+				2903AC2E2A852C7F0064680D /* Database.swift in Sources */,
 				2903ABE62A850A1E0064680D /* IOSDatabasesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,7 +324,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2903AC212A852A760064680D /* DataBaseBenchmarkView.swift in Sources */,
 				2903ABFC2A850A1F0064680D /* IOSDatabasesTests.swift in Sources */,
+				2903AC2F2A852C7F0064680D /* Database.swift in Sources */,
+				2903AC1E2A852A4F0064680D /* DuckDBLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +644,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2903AC222A852AA60064680D /* XCRemoteSwiftPackageReference "duckdb-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/duckdb/duckdb-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.1;
+			};
+		};
+		2903AC252A852B260064680D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		2903AC2A2A852BE50064680D /* XCRemoteSwiftPackageReference "SQLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2903AC232A852AA60064680D /* DuckDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2903AC222A852AA60064680D /* XCRemoteSwiftPackageReference "duckdb-swift" */;
+			productName = DuckDB;
+		};
+		2903AC262A852B260064680D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2903AC252A852B260064680D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		2903AC282A852B260064680D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2903AC252A852B260064680D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		2903AC2B2A852BE50064680D /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2903AC2A2A852BE50064680D /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2903ABF02A850A1F0064680D /* IOSDatabases.xcdatamodeld */ = {

@@ -34,3 +34,5 @@ final class IOSDatabasesTests: XCTestCase {
     }
 
 }
+
+explain select rnd, a from (select random(), 2 as 'a'') as t(rnd, a) where rnd < 0.5;
