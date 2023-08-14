@@ -11,24 +11,23 @@ import CoreData
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-//            let database = DataBase.DuckDB
             ForEach(DataBase.allCases) { db in
                 NavigationLink(db.rawValue, value: db)
             }
-                .buttonStyle(.bordered)
-                .navigationDestination(for: DataBase.self, destination: {
-                    database in
-                    switch database {
-                    case .DuckDB:
-                        DataBaseBenchmarkView(title: database.rawValue, database: database)
-                    case .CoreData:
-                        DataBaseBenchmarkView(title: database.rawValue, database: database)
-                    case .RealmDB:
-                        DataBaseBenchmarkView(title: database.rawValue, database: database)
-                    case .SQLite:
-                        DataBaseBenchmarkView(title: database.rawValue, database: database)
-                    }
-                })
+            .buttonStyle(.bordered)
+            .navigationDestination(for: DataBase.self, destination: {
+                database in
+                switch database {
+                case .DuckDB:
+                    DataBaseBenchmarkView(title: database.rawValue, database: database)
+                case .CoreData:
+                    DataBaseBenchmarkView(title: database.rawValue, database: database)
+                case .RealmDB:
+                    DataBaseBenchmarkView(title: database.rawValue, database: database)
+                case .SQLite:
+                    DataBaseBenchmarkView(title: database.rawValue, database: database)
+                }
+            })
         }
     }
 }
