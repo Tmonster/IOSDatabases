@@ -11,7 +11,9 @@ import Foundation
 public enum BenchmarkError: Error {
   /// for some reason cannot load the database
     case dataBaseLoadError
-    case dataBaseImportError
+    /// when importing data, the number of records imported does not match
+    /// the number of records in the CSV file
+    case dataBaseImportError(reason: String?)
     
     case databaseDeleteError(reason: String?)
     

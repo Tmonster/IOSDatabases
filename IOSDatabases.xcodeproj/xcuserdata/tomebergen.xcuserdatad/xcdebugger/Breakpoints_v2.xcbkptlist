@@ -14,8 +14,8 @@
             filePath = "IOSDatabases/DatabaseLogic/DuckDBLogic.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "ImportBatchData()"
             landmarkType = "7">
             <Locations>
@@ -170,8 +170,8 @@
             filePath = "IOSDatabases/DatabaseViews/DataBaseBenchmarkView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "ImportBatch()"
             landmarkType = "7">
             <Locations>
@@ -308,16 +308,63 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "22CDD432-218D-4BC4-BEE6-995E992D79E9"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "ImportBatchData()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "22CDD432-218D-4BC4-BEE6-995E992D79E9 - 91b1ab5e03708f1f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "22CDD432-218D-4BC4-BEE6-995E992D79E9 - 91b1ab5e03708fc0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "22CDD432-218D-4BC4-BEE6-995E992D79E9 - 91b1ab5e03708fc0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -330,8 +377,8 @@
             filePath = "IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "ImportBatchData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -340,14 +387,317 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "266C5573-BFB9-49B6-92B5-FBB403687B6C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "ImportBatchData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "266C5573-BFB9-49B6-92B5-FBB403687B6C - 91b1ab5e03708d6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "644">
+               </Location>
+               <Location
+                  uuid = "266C5573-BFB9-49B6-92B5-FBB403687B6C - 91b1ab5e03708d4c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "644">
+               </Location>
+               <Location
+                  uuid = "266C5573-BFB9-49B6-92B5-FBB403687B6C - 91b1ab5e03708d4c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.RealmBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/RealmBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "708">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5585D2F1-A848-4C99-A89F-7A9624613332"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "ImportBatchData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5585D2F1-A848-4C99-A89F-7A9624613332 - 4e6d0fa3e7ade1b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "5585D2F1-A848-4C99-A89F-7A9624613332 - 4e6d0fa3e7ade150"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26794891-1BB1-4921-9873-A48DA03206FA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "GetDuckDBConnection()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "26794891-1BB1-4921-9873-A48DA03206FA - 51e1f2eaeddf46df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.GetDuckDBConnection() throws -&gt; IOSDatabases.DuckDBBenchmarkRunner"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "26794891-1BB1-4921-9873-A48DA03206FA - 51e1f2eaeddf46df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.GetDuckDBConnection() throws -&gt; IOSDatabases.DuckDBBenchmarkRunner"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C4EE4B8-D28F-4387-945C-463866718FC6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "ImportBatchData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1C4EE4B8-D28F-4387-945C-463866718FC6 - 4e6d0fa3e7ade258"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "1120">
+               </Location>
+               <Location
+                  uuid = "1C4EE4B8-D28F-4387-945C-463866718FC6 - 4e6d0fa3e7ade27f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.DuckDBBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "1008">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D48315C9-E1BB-49C7-99D5-28B22B74A239"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "ImportBatchData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D48315C9-E1BB-49C7-99D5-28B22B74A239 - a39333a61b7847c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.SQLiteBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "588">
+               </Location>
+               <Location
+                  uuid = "D48315C9-E1BB-49C7-99D5-28B22B74A239 - a39333a61b7847c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.SQLiteBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "688">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D6F0D8E9-C4C7-45BD-BA42-FCD66E53EA1C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "ImportBatchData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D6F0D8E9-C4C7-45BD-BA42-FCD66E53EA1C - a39333a61b784ccf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static IOSDatabases.SQLiteBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "4496">
+               </Location>
+               <Location
+                  uuid = "D6F0D8E9-C4C7-45BD-BA42-FCD66E53EA1C - 61b574eabcfc9470"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () throws -&gt; () in static IOSDatabases.SQLiteBenchmarkRunner.ImportBatchData() throws -&gt; ()"
+                  moduleName = "IOSDatabases"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tomebergen/IOSDatabases/IOSDatabases/DatabaseLogic/SQLiteBenchmarkRunner.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "1584">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC878028-1A66-4012-BE97-03EC01C1D8FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOSDatabases/DatabaseLogic/DuckDBBenchmarkRunner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "ImportBatchData()"
             landmarkType = "7">
          </BreakpointContent>

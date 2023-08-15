@@ -35,7 +35,8 @@ class Trip : Object {
 
 final class RealmBenchmarkRunner : BenchmarkProtocol {
     
-    static let realm_filename = "taxis.realmdb"
+    static let realm_filename = "taxis"
+    static let realm_extension = ".realmdb"
     
     static func GetRealmConnection() throws -> Realm {
         // Create our database and connection as described above
@@ -44,7 +45,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
         config.deleteRealmIfMigrationNeeded = true
         config.fileURL!.deleteLastPathComponent()
         config.fileURL!.appendPathComponent(realm_filename)
-        config.fileURL!.appendPathExtension("realm")
+        config.fileURL!.appendPathExtension(realm_extension)
         let realm_connection = try! Realm(configuration: config)
     
         return realm_connection
@@ -92,7 +93,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
     
     static func ImportBatchData() throws {
         var parsed_data : [Trip] = []
-        let all_data = CSVTripReader.readCSV(inputFile: GetTaxiFileName(), separator: ",")
+        let all_data = CSVTripReader.readCSV(inputFile: CSVTripReader.CSV_FILE, separator: ",")
         for row in all_data {
             if (row.count > 0) {
                 let trip = parseTrip(str_trip: row)
@@ -106,7 +107,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
             let realm_connection = try RealmBenchmarkRunner.GetRealmConnection()
             
             // could lead to bias, hopefully no.
-            var allTrips = realm_connection.objects(Trip.self)
+            let allTrips = realm_connection.objects(Trip.self)
             if (allTrips.count > 0) {
                 RealmBenchmarkRunner.deleteAllTrips(realm_connection: realm_connection)
                 throw BenchmarkError.databaseNotEmpty(reason: "realm benchmark assumes database with no trips. All trips have been deleted, please re-run benchmark.")
@@ -116,23 +117,29 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
                 realm_connection.add(parsed_data)
             }
             // delete the objects as well
-            allTrips = realm_connection.objects(Trip.self)
-            if (allTrips.count != CSVTripReader.NUM_TRIPS) {
+            let num_trips = RealmBenchmarkRunner.GetNumtrips()
+            if (num_trips != CSVTripReader.NUM_TRIPS) {
                 throw BenchmarkError.realmBatchLoadCountMismatch
-                
             }
+            print("inserted \(num_trips) records into realm DB")
+            
         }
     
     }
 
-    
-    static func GetTaxiFileName() -> String {
-        return "/Users/tomebergen/Swift-benchmarks/taxi-one-month-subset.csv"
+    static func GetNumtrips() -> Int {
+        var ret = 0
+        do {
+            let realm_connection = try RealmBenchmarkRunner.GetRealmConnection()
+            let allTrips = realm_connection.objects(Trip.self)
+            ret = allTrips.count
+        } catch {
+            print("encountered realm benchmark error \(error)")
+        }
+        return ret
     }
     
-    static func GetAllTrips() throws {
-       
-    }
+
     
     static func ImportSingleData() throws {
         print("duck simple import")
@@ -146,7 +153,11 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
         
     }
     
-    func DeleteBatchData() throws {
+    static func DeleteBatchData() throws {
+        let realm_connection = try GetRealmConnection()
+        let num_trips = GetNumtrips()
+        deleteAllTrips(realm_connection: realm_connection)
+        print("deleted \(num_trips) from realm db")
         
     }
     

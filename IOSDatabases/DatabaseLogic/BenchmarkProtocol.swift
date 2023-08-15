@@ -16,6 +16,6 @@ protocol BenchmarkProtocol {
     static func ImportSingleData() throws
     func UpdateBatchData() throws
     func UpdateSingleData() throws
-    func DeleteBatchData() throws
+    static func DeleteBatchData() throws
     func DeleteSingleData() throws
 }

@@ -40,6 +40,7 @@ struct DataBaseBenchmarkView: View {
     }
     
     func ImportBatch() {
+        let start = DispatchTime.now()
         do {
             switch database {
             case .CoreData:
@@ -49,12 +50,15 @@ struct DataBaseBenchmarkView: View {
             case .RealmDB:
                 try RealmBenchmarkRunner.ImportBatchData()
             case .SQLite:
-                print("not implemented yet")
-//                SQLLiteManager.ImportData()
+                try SQLiteBenchmarkRunner.ImportBatchData()
             }
         } catch {
             print("error calling import Data \(error)")
         }
+        let end = DispatchTime.now()
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+        let timeInterval = Double(nanoTime) / 1_000_000_000
+        print("\(database.rawValue): time to batch insert = \(timeInterval)")
     }
     func ImportSingle() {
         
@@ -66,7 +70,25 @@ struct DataBaseBenchmarkView: View {
         
     }
     func DeleteBatch() {
-        
+        let start = DispatchTime.now()
+        do {
+            switch database {
+            case .CoreData:
+                print("core data not implemented yet")
+            case .DuckDB:
+                try DuckDBBenchmarkRunner.DeleteBatchData()
+            case .RealmDB:
+                try RealmBenchmarkRunner.DeleteBatchData()
+            case .SQLite:
+                try SQLiteBenchmarkRunner.DeleteBatchData()
+            }
+        } catch {
+            print("error calling import Data \(error)")
+        }
+        let end = DispatchTime.now()
+        let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+        let timeInterval = Double(nanoTime) / 1_000_000_000
+        print("\(database.rawValue): time to batch delete = \(timeInterval)")
     }
     func DeleteSingle() {
         

@@ -1,8 +1,8 @@
 //
-//  DuckDBLogic.swift
+//  DuckDBBenchmarkRunner.swift
 //  IOSDatabases
 //
-//  Created by Tom Ebergen on 8/10/23.
+//  Created by Tom Ebergen on 8/15/23.
 //
 
 import Foundation
@@ -12,12 +12,12 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     let database: Database
     let connection: Connection
-    static let filename = "taxis.duckdb"
+    static let filename = "/Users/tomebergen/IOSDatabases/taxis.duckdb"
     
     static func GetDuckDBConnection() throws -> DuckDBBenchmarkRunner {
         // Create our database and connection as described above
         do {
-            let url = URL(filePath: "/Users/tomebergen/IOS-benchmarks/taxis.duckdb")
+            let url = URL(filePath: filename)
             let database = try Database(store: .file(at: url))
             let connection = try database.connect()
             
@@ -31,31 +31,31 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
             throw BenchmarkError.dataBaseLoadError
         }
     }
-    
-    static func GetTaxiFileName() -> String {
-        return "/Users/tomebergen/IOS-benchmarks/taxi-one-month-subset.csv"
-    }
-    
+
     static func deleteAllTrips(duckdb_connection: DuckDBBenchmarkRunner) throws {
         do {
-            try duckdb_connection.connection.execute("drop table trips");
+            try duckdb_connection.connection.execute("delete from trips where 1=1");
         } catch {
             throw BenchmarkError.databaseDeleteError(reason: "Duckdb: could not delete trips")
         }
     }
     
-    func checkTrips(duckdb_connection: DuckDBBenchmarkRunner) throws {
+    static func getNumTrips(duckdb_connection: DuckDBBenchmarkRunner) throws -> UInt64 {
         let tables = try duckdb_connection.connection.query("show tables;")
         if (tables.rowCount > 0) {
-            throw BenchmarkError.databaseNotEmpty(reason: "Duckdb trips table exists")
+            let num_trips = try duckdb_connection.connection.query("select * from trips;")
+            return num_trips.rowCount
         }
+        return tables.rowCount
     }
     
     static func ImportBatchData() throws {
         let instance = try GetDuckDBConnection()
-        let filename = DuckDBBenchmarkRunner.GetTaxiFileName()
+        let filename = CSVTripReader.CSV_FILE
         
-        let _ = checkTrips(instance)
+        if (try getNumTrips(duckdb_connection: instance) != 0) {
+            throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
+        }
         
         try instance.connection.execute("Create Table trips as (select * from read_csv_auto('\(filename)'))")
         // verify amount
@@ -65,6 +65,7 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         if (result.rowCount != CSVTripReader.NUM_TRIPS) {
             print("error during DUCKDB importing. Inserted count doesn't match CSV trip count")
         }
+        print("imported \(result.rowCount) records into DuckDB database")
     }
     
     static func ImportSingleData() throws {
@@ -79,8 +80,12 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         
     }
     
-    func DeleteBatchData() throws {
-        
+    static func DeleteBatchData() throws {
+        let instance = try GetDuckDBConnection()
+        let num_trips = try DuckDBBenchmarkRunner.getNumTrips(duckdb_connection: instance)
+        try deleteAllTrips(duckdb_connection: instance)
+        print("deleted \(num_trips) trips")
+
     }
     
     func DeleteSingleData() throws {

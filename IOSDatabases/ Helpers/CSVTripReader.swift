@@ -12,7 +12,9 @@ final class CSVTripReader {
     
     static let NUM_TRIPS = 50000
     
-    static func readCSV(inputFile: String, separator: String) -> [String]{
+    static let CSV_FILE = "/Users/tomebergen/IOSDatabases/taxi-one-month-subset.csv"
+    
+    static func readCSV(inputFile: String, separator: String) -> [String] {
         // split the filename
         do {
             let content = try String(contentsOfFile: inputFile)
