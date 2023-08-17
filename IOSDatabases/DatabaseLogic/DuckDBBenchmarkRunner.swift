@@ -7,12 +7,14 @@
 
 import Foundation
 import DuckDB
+import TabularData
 
 final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     let database: Database
     let connection: Connection
     static let filename = "/Users/tomebergen/IOSDatabases/taxis.duckdb"
+    static let schema = "columns={'vendor_name' :  'VARCHAR', 'pickup_datetime' :  'VARCHAR', 'dropoff_datetime' :  'VARCHAR', 'passenger_count' :  'Int', 'trip_distance' :  'Double', 'pickup_longitude' :  'Double', 'pickup_latitude' :  'Double', 'rate_code' :  'VARCHAR', 'store_and_fwd' :  'VARCHAR', 'dropoff_longitude' :  'Double', 'dropoff_latitude' :  'Double', 'payment_type' :  'VARCHAR', 'fare_amount' :  'Double', 'extra' :  'Double', 'mta_tax' :  'Double', 'tip_amount' :  'Double', 'tolls_amount' :  'Double', 'total_amount' :  'Double', 'improvement_surcharge' :  'Double', 'congestion_surcharge' :  'Double', 'pickup_location_id' :  'Int', 'dropoff_location_id' :  'Int', 'year' :  'Int', 'month' :  'Int'}"
     
     static func GetDuckDBConnection() throws -> DuckDBBenchmarkRunner {
         // Create our database and connection as described above
@@ -57,13 +59,13 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
             throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
         }
         
-        try instance.connection.execute("Create Table trips as (select * from read_csv_auto('\(filename)'))")
+        try instance.connection.execute("Create or Replace Table trips as (select * from read_csv_auto('\(filename)', \(schema)))")
         // verify amount
         let result = try instance.connection.query("""
           Select * from trips;
         """)
         if (result.rowCount != CSVTripReader.NUM_TRIPS) {
-            print("error during DUCKDB importing. Inserted count doesn't match CSV trip count")
+            print("error during DUCKDB importing. Inserted count of \(result.rowCount)doesn't match CSV trip count")
         }
         print("imported \(result.rowCount) records into DuckDB database")
     }
@@ -90,6 +92,21 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     func DeleteSingleData() throws {
         
+    }
+    
+    static func RunAggregateQuery() throws {
+        let instance = try GetDuckDBConnection()
+        let result = try instance.connection.query("Select avg(tip_amount/total_amount) * 100 as avg_tip, month from trips group by month")
+        let avg_tip = result[0].cast(to: Double.self)
+        let month = result[1].cast(to: Int.self)
+    
+        let dataframe_result =  DataFrame(columns: [
+            TabularData.Column(avg_tip)
+              .eraseToAnyColumn(),
+            TabularData.Column(month)
+              .eraseToAnyColumn(),
+          ])
+        print(dataframe_result)
     }
     
     // export the data to csv, read from it and return the line by line data

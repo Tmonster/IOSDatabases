@@ -11,7 +11,7 @@ import SQLite
 final class SQLiteBenchmarkRunner : BenchmarkProtocol {
     
     static let filename = "/Users/tomebergen/IOSDatabases/trips.sqlite3"
-    static func GetEmptyConnection() throws -> Connection {
+    static func GetConnectoin() throws -> Connection {
         // Create our database and connection as described above
         do {
             let database = try Connection(filename)
@@ -22,10 +22,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
             throw BenchmarkError.dataBaseLoadError
         }
     }
-    
-    static func GetTaxiFileName() -> String {
-        return "/Users/tomebergen/IOSDatabases/taxi-one-month-subset.csv"
-    }
+
     
     static func deleteAllTrips(sqlite_connection: Connection) throws {
         do {
@@ -50,7 +47,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
     static func ImportBatchData() throws {
         do {
             
-            let database = try SQLiteBenchmarkRunner.GetEmptyConnection()
+            let database = try SQLiteBenchmarkRunner.GetConnectoin()
             
             let trips = Table("Trips")
             if (try GetNumtrips(sqlite_connection: database) != 0) {
@@ -105,7 +102,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
                 trip.column(month)
             })
             
-            let all_data = CSVTripReader.readCSV(inputFile: GetTaxiFileName(), separator: ",")
+            let all_data = CSVTripReader.readCSV(inputFile: CSVTripReader.CSV_FILE, separator: ",")
             try database.transaction {
                 for row in all_data {
                     let parsed_row = row.components(separatedBy: ",")
@@ -146,7 +143,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
             
             let record_count = try GetNumtrips(sqlite_connection: database)
             if (record_count != CSVTripReader.NUM_TRIPS) {
-                throw BenchmarkError.dataBaseImportError(reason: "Did not import 50000 records")
+                throw BenchmarkError.dataBaseImportError(reason: "imported \(record_count) trips and not \(CSVTripReader.NUM_TRIPS)")
             }
             print("imported \(record_count) records into SQLite database")
         }
@@ -164,8 +161,20 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
         
     }
     
+    static func RunAggregateQuery() throws {
+        let database = try SQLiteBenchmarkRunner.GetConnectoin()
+        do {
+            for row in try database.prepare("Select avg(tip_amount/total_amount) * 100, month from trips group by month") {
+                print("tip avg \(row[0]), mont: \(row[1])")
+            }
+        }
+    
+//        let result = try database.run("Select avg(tip_amount/total_amount) * 100 from trips group by month")
+//        print(result)
+    }
+    
     static func DeleteBatchData() throws {
-        let database = try SQLiteBenchmarkRunner.GetEmptyConnection()
+        let database = try SQLiteBenchmarkRunner.GetConnectoin()
         
         let num_trips = try GetNumtrips(sqlite_connection: database)
         try SQLiteBenchmarkRunner.deleteAllTrips(sqlite_connection: database)

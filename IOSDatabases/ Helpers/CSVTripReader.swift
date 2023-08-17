@@ -10,9 +10,9 @@ import Foundation
 
 final class CSVTripReader {
     
-    static let NUM_TRIPS = 50000
+    static let NUM_TRIPS = 999996
     
-    static let CSV_FILE = "/Users/tomebergen/IOSDatabases/taxi-one-month-subset.csv"
+    static let CSV_FILE = "/Users/tomebergen/IOSDatabases/taxi-subset-all-months.csv"
     
     static func readCSV(inputFile: String, separator: String) -> [String] {
         // split the filename

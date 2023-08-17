@@ -18,4 +18,5 @@ protocol BenchmarkProtocol {
     func UpdateSingleData() throws
     static func DeleteBatchData() throws
     func DeleteSingleData() throws
+    static func RunAggregateQuery() throws
 }

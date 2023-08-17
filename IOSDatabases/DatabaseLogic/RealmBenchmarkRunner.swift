@@ -161,6 +161,9 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
         
     }
     
+    static func RunAggregateQuery() throws {
+    }
+    
     func DeleteSingleData() throws {
         
     }
