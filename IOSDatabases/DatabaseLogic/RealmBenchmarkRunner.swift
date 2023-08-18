@@ -93,7 +93,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
     
     static func ImportBatchData() throws {
         var parsed_data : [Trip] = []
-        let all_data = CSVTripReader.readCSV(inputFile: CSVTripReader.CSV_FILE, separator: ",")
+        let all_data = CSVTripReader.readCSV()
         for row in all_data {
             if (row.count > 0) {
                 let trip = parseTrip(str_trip: row)
@@ -139,19 +139,12 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
         return ret
     }
     
+    
+    static func RunAggregateQuery() throws {
+    }
 
     
-    static func ImportSingleData() throws {
-        print("duck simple import")
-    }
-    
-    func UpdateBatchData() throws {
-        
-    }
-    
-    func UpdateSingleData() throws {
-        
-    }
+
     
     static func DeleteBatchData() throws {
         let realm_connection = try GetRealmConnection()
@@ -161,10 +154,8 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
         
     }
     
-    static func RunAggregateQuery() throws {
-    }
-    
-    func DeleteSingleData() throws {
-        
-    }
+//    static func ImportSingleData() throws {}
+//    func UpdateBatchData() throws {}
+//    func UpdateSingleData() throws {}
+//    func DeleteSingleData() throws {}
 }

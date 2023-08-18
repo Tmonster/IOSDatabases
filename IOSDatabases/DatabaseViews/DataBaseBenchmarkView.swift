@@ -11,8 +11,6 @@ struct DataBaseBenchmarkView: View {
     let title: String
     let database: DataBase
     
-    
-    
     var body: some View {
         Text(database.rawValue)
         VStack {

@@ -44,63 +44,49 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         }
     }
     
-    static func getNumTrips(duckdb_connection: DuckDBBenchmarkRunner) throws -> UInt64 {
+    static func getNumRecords(duckdb_connection: DuckDBBenchmarkRunner) throws -> UInt64 {
         let tables = try duckdb_connection.connection.query("show tables;")
         if (tables.rowCount > 0) {
-            let num_trips = try duckdb_connection.connection.query("select * from trips;")
+            let num_trips = try duckdb_connection.connection.query("select * from \(CSVTripReader.getTableName());")
             return num_trips.rowCount
         }
         return tables.rowCount
     }
-
     
     static func ImportBatchData() throws {
         let instance = try GetDuckDBConnection()
-        let filename = CSVTripReader.LINEITEM_FILE
+        let filename = CSVTripReader.getCSVFile()
         
-        if (try getNumTrips(duckdb_connection: instance) != 0) {
+        let num_stored_records: UInt64 = try getNumRecords(duckdb_connection: instance)
+        
+        var schema : String
+        switch CSVTripReader.benchmark {
+        case .Taxi_benchmark:
+            schema = taxi_schema
+        case .tpch_benchmark:
+            schema = lineitem_schema
+        }
+        
+        if (num_stored_records != 0) {
             throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
         }
         
-        try instance.connection.execute("Create or Replace Table lineitem as (select * from read_csv_auto('\(filename)', \(lineitem_schema)))")
+        
+        try instance.connection.execute("Create or Replace Table \(CSVTripReader.getTableName()) as (select * from read_csv_auto('\(filename)', \(schema)))")
         // verify amount
-        let result = try instance.connection.query("""
-          Select * from lineitem;
-        """)
-        if (result.rowCount != CSVTripReader.NUM_ITEMS) {
-            print("error during DUCKDB importing. Inserted count of \(result.rowCount)doesn't match CSV trip count")
+        let num_inserted_records = try getNumRecords(duckdb_connection: instance)
+        if (num_inserted_records != CSVTripReader.getNumCSVRecords()) {
+            print("error during DUCKDB importing. Inserted count of \(num_inserted_records) doesn't match CSV trip count")
         }
-        print("imported \(result.rowCount) records into DuckDB database")
+        print("imported \(num_inserted_records) records into DuckDB database")
     }
     
     static func RunAggregateQuery() throws {
         let instance = try GetDuckDBConnection()
-        let result = try instance.connection.query("SELECT     l_returnflag,     l_linestatus,     sum(l_quantity) AS sum_qty,     sum(l_extendedprice) AS sum_base_price,     sum(l_extendedprice * (1 - l_discount)) AS sum_disc_price,     sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) AS sum_charge,     avg(l_quantity) AS avg_qty,     avg(l_extendedprice) AS avg_price,     avg(l_discount) AS avg_disc,     count(*) AS count_order FROM     lineitem WHERE     l_shipdate >= CAST('1998-09-02' AS date) GROUP BY     l_returnflag,     l_linestatus ORDER BY     l_returnflag,     l_linestatus;")
-        
-    
+        let _ = try instance.connection.query(CSVTripReader.getAggregateQuery())
         print("got it")
     }
     
-    
-//    static func ImportBatchData() throws {
-//        let instance = try GetDuckDBConnection()
-//        let filename = CSVTripReader.CSV_FILE
-//
-//        if (try getNumTrips(duckdb_connection: instance) != 0) {
-//            throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
-//        }
-//
-//        try instance.connection.execute("Create or Replace Table trips as (select * from read_csv_auto('\(filename)', \(schema)))")
-//        // verify amount
-//        let result = try instance.connection.query("""
-//          Select * from trips;
-//        """)
-//        if (result.rowCount != CSVTripReader.NUM_TRIPS) {
-//            print("error during DUCKDB importing. Inserted count of \(result.rowCount)doesn't match CSV trip count")
-//        }
-//        print("imported \(result.rowCount) records into DuckDB database")
-//    }
-//
     static func ImportSingleData() throws {
         print("duck simple import")
     }
@@ -115,7 +101,7 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     static func DeleteBatchData() throws {
         let instance = try GetDuckDBConnection()
-        let num_trips = try DuckDBBenchmarkRunner.getNumTrips(duckdb_connection: instance)
+        let num_trips = try DuckDBBenchmarkRunner.getNumRecords(duckdb_connection: instance)
         try deleteAllTrips(duckdb_connection: instance)
         print("deleted \(num_trips) trips")
 
