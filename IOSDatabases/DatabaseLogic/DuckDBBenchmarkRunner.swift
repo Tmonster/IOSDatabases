@@ -36,28 +36,31 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         }
     }
 
-    static func deleteAllTrips(duckdb_connection: DuckDBBenchmarkRunner) throws {
+    static func deleteAllRecords(duckdb_connection: DuckDBBenchmarkRunner) throws {
         do {
-            try duckdb_connection.connection.execute("delete from trips where 1=1");
+            try duckdb_connection.connection.execute("delete from \(CSVTripReader.getTableName()) where 1=1");
         } catch {
-            throw BenchmarkError.databaseDeleteError(reason: "Duckdb: could not delete trips")
+            throw BenchmarkError.databaseDeleteError(reason: "Duckdb: could not delete all \(CSVTripReader.getTableName()) records")
         }
     }
     
-    static func getNumRecords(duckdb_connection: DuckDBBenchmarkRunner) throws -> UInt64 {
-        let tables = try duckdb_connection.connection.query("show tables;")
-        if (tables.rowCount > 0) {
-            let num_trips = try duckdb_connection.connection.query("select * from \(CSVTripReader.getTableName());")
-            return num_trips.rowCount
+    static func getNumRecords(duckdb_connection: DuckDBBenchmarkRunner) throws -> Int {
+        do {
+            let num_trips = try duckdb_connection.connection.query("select count(*) from \(CSVTripReader.getTableName());")
+            let count_col = num_trips[0].cast(to: Int.self)
+            let count_val : Int = count_col[0] ?? 0
+            return count_val
+        } catch {
+            // assume table doesn't exist return 0
+            return 0
         }
-        return tables.rowCount
     }
     
     static func ImportBatchData() throws {
         let instance = try GetDuckDBConnection()
         let filename = CSVTripReader.getCSVFile()
         
-        let num_stored_records: UInt64 = try getNumRecords(duckdb_connection: instance)
+        let num_stored_records: Int = try getNumRecords(duckdb_connection: instance)
         
         var schema : String
         switch CSVTripReader.benchmark {
@@ -102,7 +105,7 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     static func DeleteBatchData() throws {
         let instance = try GetDuckDBConnection()
         let num_trips = try DuckDBBenchmarkRunner.getNumRecords(duckdb_connection: instance)
-        try deleteAllTrips(duckdb_connection: instance)
+        try deleteAllRecords(duckdb_connection: instance)
         print("deleted \(num_trips) trips")
 
     }

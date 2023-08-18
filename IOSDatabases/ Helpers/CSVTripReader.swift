@@ -10,13 +10,13 @@ import Foundation
 
 final class CSVTripReader {
     
-    static let benchmark : Benchmark = Benchmark.Taxi_benchmark
+    static let benchmark : Benchmark = Benchmark.tpch_benchmark
     
     static let NUM_TRIPS = 500016
     static let NYC_TAXI_CSV = "/Users/tomebergen/IOSDatabases/taxi-subset-all-months.csv"
     
-    static let LINEITEM_CSV = "/Users/tomebergen/IOSDatabases/lineitem-small.csv"
-    static let NUM_ITEMS = 500000
+    static let LINEITEM_CSV = "/Users/tomebergen/IOSDatabases/lineitem-bigger.csv"
+    static let NUM_ITEMS = 1800736
     
     static func getNumCSVRecords() -> Int {
         switch benchmark {
