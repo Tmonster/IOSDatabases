@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class CSVTripReader {
+final class BenchmarkManager {
     
     static let benchmark : Benchmark = Benchmark.tpch_benchmark
     

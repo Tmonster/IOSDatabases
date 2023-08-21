@@ -48,7 +48,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
         
         let database = try SQLiteBenchmarkRunner.GetConnection()
         
-        let lineitem = Table(CSVTripReader.getTableName())
+        let lineitem = Table(BenchmarkManager.getTableName())
         let l_orderkey = Expression<Int>("l_orderkey")
         let l_partkey = Expression<Int>("l_partkey")
         let l_suppkey = Expression<Int>("l_suppkey")
@@ -86,7 +86,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
         })
         
         
-        let all_data = CSVTripReader.readCSV()
+        let all_data = BenchmarkManager.readCSV()
         let dateFormatter = DateFormatter()
         
         try database.transaction {
@@ -120,8 +120,8 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
         }
         
         let record_count = try GetNumtrips(sqlite_connection: database)
-        if (record_count != CSVTripReader.getNumCSVRecords()) {
-            throw BenchmarkError.dataBaseImportError(reason: "imported \(record_count) items and not \(CSVTripReader.getNumCSVRecords())")
+        if (record_count != BenchmarkManager.getNumCSVRecords()) {
+            throw BenchmarkError.dataBaseImportError(reason: "imported \(record_count) items and not \(BenchmarkManager.getNumCSVRecords())")
         }
         print("imported \(record_count) items into SQLite database")
     }
@@ -184,7 +184,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
                 trip.column(month)
             })
 
-            let all_data = CSVTripReader.readCSV()
+            let all_data = BenchmarkManager.readCSV()
             try database.transaction {
                 for row in all_data {
                     let parsed_row = row.components(separatedBy: ",")
@@ -224,15 +224,15 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
             }
 
             let record_count = try GetNumtrips(sqlite_connection: database)
-            if (record_count != CSVTripReader.NUM_TRIPS) {
-                throw BenchmarkError.dataBaseImportError(reason: "imported \(record_count) trips and not \(CSVTripReader.NUM_TRIPS)")
+            if (record_count != BenchmarkManager.NUM_TRIPS) {
+                throw BenchmarkError.dataBaseImportError(reason: "imported \(record_count) trips and not \(BenchmarkManager.NUM_TRIPS)")
             }
             print("imported \(record_count) records into SQLite database")
         }
     }
     
     static func ImportBatchData() throws {
-        switch CSVTripReader.benchmark {
+        switch BenchmarkManager.benchmark {
         case .Taxi_benchmark:
             try ImportTaxis()
         case .tpch_benchmark:
@@ -252,7 +252,7 @@ final class SQLiteBenchmarkRunner : BenchmarkProtocol {
     static func RunAggregateQuery() throws {
         let database = try SQLiteBenchmarkRunner.GetConnection()
         do {
-            for row in try database.prepare(CSVTripReader.getAggregateQuery()) {
+            for row in try database.prepare(BenchmarkManager.getAggregateQuery()) {
                 print("ret flag = \(row[0])")
             }
         }

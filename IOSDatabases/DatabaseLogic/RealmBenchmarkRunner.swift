@@ -93,7 +93,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
     
     static func ImportBatchData() throws {
         var parsed_data : [Trip] = []
-        let all_data = CSVTripReader.readCSV()
+        let all_data = BenchmarkManager.readCSV()
         for row in all_data {
             if (row.count > 0) {
                 let trip = parseTrip(str_trip: row)
@@ -118,7 +118,7 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
             }
             // delete the objects as well
             let num_trips = RealmBenchmarkRunner.GetNumtrips()
-            if (num_trips != CSVTripReader.NUM_TRIPS) {
+            if (num_trips != BenchmarkManager.NUM_TRIPS) {
                 throw BenchmarkError.realmBatchLoadCountMismatch
             }
             print("inserted \(num_trips) records into realm DB")

@@ -32,8 +32,7 @@
 		2932A65E2A8A74080015DF4A /* RealmBenchmarkRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A65C2A8A74080015DF4A /* RealmBenchmarkRunner.swift */; };
 		2932A6612A8A77AB0015DF4A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6602A8A77AB0015DF4A /* Errors.swift */; };
 		2932A6622A8A77AB0015DF4A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6602A8A77AB0015DF4A /* Errors.swift */; };
-		2932A6642A8A79600015DF4A /* CSVTripReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6632A8A79600015DF4A /* CSVTripReader.swift */; };
-		2932A6652A8A79600015DF4A /* CSVTripReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6632A8A79600015DF4A /* CSVTripReader.swift */; };
+		2932A6642A8A79600015DF4A /* BenchmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6632A8A79600015DF4A /* BenchmarkManager.swift */; };
 		2932A66A2A8A85080015DF4A /* SQLiteBenchmarkRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6692A8A85080015DF4A /* SQLiteBenchmarkRunner.swift */; };
 		2932A66B2A8A85080015DF4A /* SQLiteBenchmarkRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2932A6692A8A85080015DF4A /* SQLiteBenchmarkRunner.swift */; };
 /* End PBXBuildFile section */
@@ -74,7 +73,7 @@
 		2932A6592A8A70070015DF4A /* BenchmarkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkProtocol.swift; sourceTree = "<group>"; };
 		2932A65C2A8A74080015DF4A /* RealmBenchmarkRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmBenchmarkRunner.swift; sourceTree = "<group>"; };
 		2932A6602A8A77AB0015DF4A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		2932A6632A8A79600015DF4A /* CSVTripReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVTripReader.swift; sourceTree = "<group>"; };
+		2932A6632A8A79600015DF4A /* BenchmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchmarkManager.swift; sourceTree = "<group>"; };
 		2932A6692A8A85080015DF4A /* SQLiteBenchmarkRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteBenchmarkRunner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,7 +191,7 @@
 		2903AC302A8B6E1D0064680D /*  Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2932A6632A8A79600015DF4A /* CSVTripReader.swift */,
+				2932A6632A8A79600015DF4A /* BenchmarkManager.swift */,
 			);
 			path = " Helpers";
 			sourceTree = "<group>";
@@ -347,7 +346,7 @@
 				2903AC202A852A760064680D /* DataBaseBenchmarkView.swift in Sources */,
 				2932A6612A8A77AB0015DF4A /* Errors.swift in Sources */,
 				2903ABE82A850A1E0064680D /* ContentView.swift in Sources */,
-				2932A6642A8A79600015DF4A /* CSVTripReader.swift in Sources */,
+				2932A6642A8A79600015DF4A /* BenchmarkManager.swift in Sources */,
 				2903AC2E2A852C7F0064680D /* Database.swift in Sources */,
 				2903ABE62A850A1E0064680D /* IOSDatabasesApp.swift in Sources */,
 			);
@@ -361,7 +360,6 @@
 				2932A65E2A8A74080015DF4A /* RealmBenchmarkRunner.swift in Sources */,
 				2903ABFC2A850A1F0064680D /* IOSDatabasesTests.swift in Sources */,
 				2932A65B2A8A70070015DF4A /* BenchmarkProtocol.swift in Sources */,
-				2932A6652A8A79600015DF4A /* CSVTripReader.swift in Sources */,
 				2903AC2F2A852C7F0064680D /* Database.swift in Sources */,
 				2903AC332A8B6E3E0064680D /* DuckDBBenchmarkRunner.swift in Sources */,
 				2932A66B2A8A85080015DF4A /* SQLiteBenchmarkRunner.swift in Sources */,

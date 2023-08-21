@@ -38,15 +38,15 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
 
     static func deleteAllRecords(duckdb_connection: DuckDBBenchmarkRunner) throws {
         do {
-            try duckdb_connection.connection.execute("delete from \(CSVTripReader.getTableName()) where 1=1");
+            try duckdb_connection.connection.execute("delete from \(BenchmarkManager.getTableName()) where 1=1");
         } catch {
-            throw BenchmarkError.databaseDeleteError(reason: "Duckdb: could not delete all \(CSVTripReader.getTableName()) records")
+            throw BenchmarkError.databaseDeleteError(reason: "Duckdb: could not delete all \(BenchmarkManager.getTableName()) records")
         }
     }
     
     static func getNumRecords(duckdb_connection: DuckDBBenchmarkRunner) throws -> Int {
         do {
-            let num_trips = try duckdb_connection.connection.query("select count(*) from \(CSVTripReader.getTableName());")
+            let num_trips = try duckdb_connection.connection.query("select count(*) from \(BenchmarkManager.getTableName());")
             let count_col = num_trips[0].cast(to: Int.self)
             let count_val : Int = count_col[0] ?? 0
             return count_val
@@ -58,12 +58,12 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     static func ImportBatchData() throws {
         let instance = try GetDuckDBConnection()
-        let filename = CSVTripReader.getCSVFile()
+        let filename = BenchmarkManager.getCSVFile()
         
         let num_stored_records: Int = try getNumRecords(duckdb_connection: instance)
         
         var schema : String
-        switch CSVTripReader.benchmark {
+        switch BenchmarkManager.benchmark {
         case .Taxi_benchmark:
             schema = taxi_schema
         case .tpch_benchmark:
@@ -75,10 +75,10 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         }
         
         
-        try instance.connection.execute("Create or Replace Table \(CSVTripReader.getTableName()) as (select * from read_csv_auto('\(filename)', \(schema)))")
+        try instance.connection.execute("Create or Replace Table \(BenchmarkManager.getTableName()) as (select * from read_csv_auto('\(filename)', \(schema)))")
         // verify amount
         let num_inserted_records = try getNumRecords(duckdb_connection: instance)
-        if (num_inserted_records != CSVTripReader.getNumCSVRecords()) {
+        if (num_inserted_records != BenchmarkManager.getNumCSVRecords()) {
             print("error during DUCKDB importing. Inserted count of \(num_inserted_records) doesn't match CSV trip count")
         }
         print("imported \(num_inserted_records) records into DuckDB database")
@@ -86,7 +86,7 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     static func RunAggregateQuery() throws {
         let instance = try GetDuckDBConnection()
-        let _ = try instance.connection.query(CSVTripReader.getAggregateQuery())
+        let _ = try instance.connection.query(BenchmarkManager.getAggregateQuery())
         print("got it")
     }
     
