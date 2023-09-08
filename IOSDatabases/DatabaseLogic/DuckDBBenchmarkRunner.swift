@@ -18,6 +18,8 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
     
     static let lineitem_schema = "columns={'l_orderkey': 'Int', 'l_partkey': 'Int', 'l_suppkey': 'Int', 'l_linenumber': 'Int', 'l_quantity': 'Double', 'l_extendedprice': 'Double', 'l_discount': 'Double', 'l_tax': 'Double', 'l_returnflag': 'VARCHAR', 'l_linestatus': 'VARCHAR', 'l_shipdate': 'Date', 'l_commitdate': 'Date', 'l_receiptdate': 'Date', 'l_shipinstruct': 'VARCHAR', 'l_shipmode': 'VARCHAR', 'l_comment': 'VARCHAR'}"
     
+    static let streaming_history_schema = "columns={'end_time': 'Date', 'artist_name': 'VARCHAR', 'track_name': 'VARCHAR', 'ms_played': 'INTEGER'}"
+    
     static func GetDuckDBConnection() throws -> DuckDBBenchmarkRunner {
         // Create our database and connection as described above
         do {
@@ -56,38 +58,61 @@ final class DuckDBBenchmarkRunner : BenchmarkProtocol {
         }
     }
     
+    
     static func ImportBatchData() throws {
         let instance = try GetDuckDBConnection()
-        let filename = BenchmarkManager.getCSVFile()
-        
-        let num_stored_records: Int = try getNumRecords(duckdb_connection: instance)
-        
-        var schema : String
-        switch BenchmarkManager.benchmark {
-        case .Taxi_benchmark:
-            schema = taxi_schema
-        case .tpch_benchmark:
-            schema = lineitem_schema
+        Task {
+            let filename = try await DataManager.getDataURL().path()
+            // let filename = BenchmarkManager.getCSVFile()
+            
+            let num_stored_records: Int = try getNumRecords(duckdb_connection: instance)
+            
+            var schema : String
+            
+            switch BenchmarkManager.benchmark {
+            case .Taxi_benchmark:
+                schema = taxi_schema
+            case .tpch_benchmark:
+                schema = lineitem_schema
+            case .spotify_benchmark:
+                schema = streaming_history_schema
+            }
+            
+            if (num_stored_records != 0) {
+                throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
+            }
+            
+            
+            try instance.connection.execute("Create or Replace Table \(BenchmarkManager.getTableName()) as (select * from read_csv_auto('\(filename)', \(schema)))")
+            // verify amount
+            let num_inserted_records = try getNumRecords(duckdb_connection: instance)
+            if (num_inserted_records != BenchmarkManager.getNumCSVRecords()) {
+                print("error during DUCKDB importing. Inserted count of \(num_inserted_records) doesn't match CSV trip count")
+            }
+            print("imported \(num_inserted_records) records into DuckDB database")
         }
-        
-        if (num_stored_records != 0) {
-            throw BenchmarkError.databaseNotEmpty(reason: "Duckdb database not empty before batch import. First run batch delete")
-        }
-        
-        
-        try instance.connection.execute("Create or Replace Table \(BenchmarkManager.getTableName()) as (select * from read_csv_auto('\(filename)', \(schema)))")
-        // verify amount
-        let num_inserted_records = try getNumRecords(duckdb_connection: instance)
-        if (num_inserted_records != BenchmarkManager.getNumCSVRecords()) {
-            print("error during DUCKDB importing. Inserted count of \(num_inserted_records) doesn't match CSV trip count")
-        }
-        print("imported \(num_inserted_records) records into DuckDB database")
     }
     
-    static func RunAggregateQuery() throws {
+    static func RunAggregateQuery(num : Int) throws {
         let instance = try GetDuckDBConnection()
-        let _ = try instance.connection.query(BenchmarkManager.getAggregateQuery())
-        print("got it")
+        var query : String = ""
+        if (num == 1) {
+            query = BenchmarkManager.getAggregateQuery1()
+        } else if (num == 2) {
+            query = BenchmarkManager.getAggregateQuery2()
+        } else if (num == 3) {
+            query = BenchmarkManager.getAggregateQuery3()
+        }
+        let ret = try instance.connection.query(query)
+        let artist_name = ret[0].cast(to: String.self)
+        let num_listens = ret[1].cast(to: Int.self)
+        let good_result = DataFrame(columns: [
+              TabularData.Column(artist_name)
+                .eraseToAnyColumn(),
+              TabularData.Column(num_listens)
+                .eraseToAnyColumn(),
+        ])
+        print(good_result)
     }
     
     static func ImportSingleData() throws {

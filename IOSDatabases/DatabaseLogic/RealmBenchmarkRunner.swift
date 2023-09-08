@@ -33,7 +33,8 @@ class Trip : Object {
     @objc var month                 : String = ""
 }
 
-final class RealmBenchmarkRunner : BenchmarkProtocol {
+//final class RealmBenchmarkRunner : BenchmarkProtocol {
+final class RealmBenchmarkRunner {
     
     static let realm_filename = "taxis"
     static let realm_extension = ".realmdb"
@@ -92,39 +93,40 @@ final class RealmBenchmarkRunner : BenchmarkProtocol {
     }
     
     static func ImportBatchData() throws {
-        var parsed_data : [Trip] = []
-        let all_data = BenchmarkManager.readCSV()
-        for row in all_data {
-            if (row.count > 0) {
-                let trip = parseTrip(str_trip: row)
-                parsed_data.append(trip)
+        Task {
+            var parsed_data : [Trip] = []
+            let all_data = await BenchmarkManager.readCSV()
+            for row in all_data {
+                if (row.count > 0) {
+                    let trip = parseTrip(str_trip: row)
+                    parsed_data.append(trip)
+                }
+            }
+            
+            // Setup Realm - Delete all previous trips
+            do {
+                // add the objects
+                let realm_connection = try RealmBenchmarkRunner.GetRealmConnection()
+                
+                // could lead to bias, hopefully no.
+                let allTrips = realm_connection.objects(Trip.self)
+                if (allTrips.count > 0) {
+                    RealmBenchmarkRunner.deleteAllTrips(realm_connection: realm_connection)
+                    throw BenchmarkError.databaseNotEmpty(reason: "realm benchmark assumes database with no trips. All trips have been deleted, please re-run benchmark.")
+                }
+                
+                try realm_connection.write {
+                    realm_connection.add(parsed_data)
+                }
+                // delete the objects as well
+                let num_trips = RealmBenchmarkRunner.GetNumtrips()
+                if (num_trips != BenchmarkManager.NUM_TRIPS) {
+                    throw BenchmarkError.realmBatchLoadCountMismatch
+                }
+                print("inserted \(num_trips) records into realm DB")
+                
             }
         }
-        
-        // Setup Realm - Delete all previous trips
-        do {
-            // add the objects
-            let realm_connection = try RealmBenchmarkRunner.GetRealmConnection()
-            
-            // could lead to bias, hopefully no.
-            let allTrips = realm_connection.objects(Trip.self)
-            if (allTrips.count > 0) {
-                RealmBenchmarkRunner.deleteAllTrips(realm_connection: realm_connection)
-                throw BenchmarkError.databaseNotEmpty(reason: "realm benchmark assumes database with no trips. All trips have been deleted, please re-run benchmark.")
-            }
-            
-            try realm_connection.write {
-                realm_connection.add(parsed_data)
-            }
-            // delete the objects as well
-            let num_trips = RealmBenchmarkRunner.GetNumtrips()
-            if (num_trips != BenchmarkManager.NUM_TRIPS) {
-                throw BenchmarkError.realmBatchLoadCountMismatch
-            }
-            print("inserted \(num_trips) records into realm DB")
-            
-        }
-    
     }
 
     static func GetNumtrips() -> Int {

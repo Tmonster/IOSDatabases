@@ -32,8 +32,14 @@ struct DataBaseBenchmarkView: View {
 //            Button("Delete single test") {
 //                DeleteSingle()
 //            }.padding()
-            Button("Run Aggregate Query") {
-                RunAggregateQuery()
+            Button("Run Aggregate Query 1") {
+                RunAggregateQuery(num: 1)
+            }.padding()
+            Button("Run Aggregate Query 2") {
+                RunAggregateQuery(num: 2)
+            }.padding()
+            Button("Run Aggregate Query 3") {
+                RunAggregateQuery(num: 3)
             }.padding()
         }
     }
@@ -42,12 +48,8 @@ struct DataBaseBenchmarkView: View {
         let start = DispatchTime.now()
         do {
             switch database {
-            case .CoreData:
-                print("core data not implemented yet")
             case .DuckDB:
                 try DuckDBBenchmarkRunner.ImportBatchData()
-            case .RealmDB:
-                try RealmBenchmarkRunner.ImportBatchData()
             case .SQLite:
                 try SQLiteBenchmarkRunner.ImportBatchData()
             }
@@ -68,18 +70,14 @@ struct DataBaseBenchmarkView: View {
     func UpdateSingle() {
         
     }
-    func RunAggregateQuery() {
+    func RunAggregateQuery(num : Int) {
         let start = DispatchTime.now()
         do {
             switch database {
-            case .CoreData:
-                print("core data not implemented yet")
             case .DuckDB:
-                try DuckDBBenchmarkRunner.RunAggregateQuery()
-            case .RealmDB:
-                try RealmBenchmarkRunner.RunAggregateQuery()
+                try DuckDBBenchmarkRunner.RunAggregateQuery(num: num)
             case .SQLite:
-                try SQLiteBenchmarkRunner.RunAggregateQuery()
+                try SQLiteBenchmarkRunner.RunAggregateQuery(num: num)
             }
         } catch {
             print("error running query \(error)")
@@ -89,16 +87,13 @@ struct DataBaseBenchmarkView: View {
         let timeInterval = Double(nanoTime) / 1_000_000_000
         print("\(database.rawValue): time to execute query = \(timeInterval)")
     }
+    
     func DeleteBatch() {
         let start = DispatchTime.now()
         do {
             switch database {
-            case .CoreData:
-                print("core data not implemented yet")
             case .DuckDB:
                 try DuckDBBenchmarkRunner.DeleteBatchData()
-            case .RealmDB:
-                try RealmBenchmarkRunner.DeleteBatchData()
             case .SQLite:
                 try SQLiteBenchmarkRunner.DeleteBatchData()
             }

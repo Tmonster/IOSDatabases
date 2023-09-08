@@ -12,7 +12,7 @@ protocol BenchmarkProtocol {
 
     static func ImportBatchData() throws
     static func DeleteBatchData() throws
-    static func RunAggregateQuery() throws
+    static func RunAggregateQuery(num : Int) throws
     //    static func ImportSingleData() throws
     //    func UpdateBatchData() throws
     //    func UpdateSingleData() throws
